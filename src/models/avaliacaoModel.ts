@@ -1,19 +1,18 @@
-import mongoose from "mongoose"
-import questaoModel, { Questao } from "./questaoModel"
+import mongoose, { NativeError } from "mongoose"
+import { MongoError } from "mongodb"
 
 export interface Avaliacao {
     nome: String,
     peso: Number,
     grau: Number,
     descricao: String,
-    questoes: [Questao]
+    questoes: [{
+        enunciado: String,
+        resposta: String
+    }]
 }
 
-interface AvaliacaoDocument extends Avaliacao, mongoose.Document { }
-
-interface AvaliacaoModel extends mongoose.Model<AvaliacaoDocument> {
-    constructor(attributes: Avaliacao): AvaliacaoDocument
-}
+export interface AvaliacaoDocument extends Avaliacao, mongoose.Document { }
 
 const schema = new mongoose.Schema({
     nome: {
@@ -34,7 +33,24 @@ const schema = new mongoose.Schema({
         type: String,
         required: false
     },
-    questoes: [questaoModel]
+    questoes: [{
+        enunciado: {
+            type: String,
+            required: true
+        },
+        resposta: {
+            type: String,
+            required: true
+        }
+    }]
 })
 
-export default mongoose.model<AvaliacaoDocument, AvaliacaoModel>('Avaliacao', schema)
+schema.post('save', (error: MongoError, doc: AvaliacaoDocument, next: (err?: NativeError) => void) => {
+    if (error.name === 'MongoError' && error.code === 11000) {
+        next(new Error('Chave Duplicada: verifique os dados'));
+    } else {
+        next(error);
+    }
+});
+
+export default mongoose.model('Avaliacao', schema)

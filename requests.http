@@ -1,0 +1,21 @@
+### Busca todas avaliações
+GET http://localhost:8000/api/v1/avaliacoes
+
+### Criar avaliação
+POST http://localhost:8000/api/v1/avaliacoes
+Content-Type: application/json
+
+{
+    "nome": "Teste",
+    "peso": 1.5,
+    "grau": 2,
+    "descricao": "Descrição do teste",
+    "questoes": [{
+        "enunciado": "Enunciado da questão 1",
+        "resposta": "Resposta da questão 1"
+    },
+    {
+        "enunciado": "Enunciado da questão 2",
+        "resposta": "Resposta da questão 2"
+    }]
+}
