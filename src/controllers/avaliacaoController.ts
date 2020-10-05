@@ -1,12 +1,20 @@
 import { Request, Response } from "express"
 import { Avaliacao } from "../models/avaliacaoModel"
-import { create, getAll } from "../service/avaliacaoService"
+import {create, getAll, getById} from "../service/avaliacaoService"
 
 export async function getHandler(request: Request, response: Response) {
     
     const serviceResponse = await getAll()
     console.log(serviceResponse)
 
+    return response.json(serviceResponse)
+}
+
+export async function getByIdHandler(request: Request, response: Response) {
+
+    let id = request.params.id
+    const serviceResponse = await getById(Number(id))
+    console.log(serviceResponse)
     return response.json(serviceResponse)
 }
 
