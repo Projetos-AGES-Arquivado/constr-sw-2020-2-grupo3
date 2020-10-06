@@ -3,9 +3,10 @@ import {
     deleteHandler,
     getByIdHandler,
     getHandler,
+    getByQueryHandler,
     patchHandler,
     postHandler,
-    putHandler
+    putHandler,
 } from './controllers/avaliacaoController';
 import { healthCheck } from './controllers/HealthController';
 
@@ -13,8 +14,6 @@ const routes = express.Router();
 
 //HealthController
 routes.get('/health', healthCheck);
-
-//AvaliacaoController
 
 //lista todos os objetos
 routes.get("/api/v1/avaliacoes", getHandler)

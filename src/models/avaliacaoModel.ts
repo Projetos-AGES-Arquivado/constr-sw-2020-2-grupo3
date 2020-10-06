@@ -15,11 +15,6 @@ export interface Avaliacao {
 export interface AvaliacaoDocument extends Avaliacao, mongoose.Document { }
 
 const schema = new mongoose.Schema({
-    id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        unique: true
-    },
     nome: {
         type: String,
         required: true,
