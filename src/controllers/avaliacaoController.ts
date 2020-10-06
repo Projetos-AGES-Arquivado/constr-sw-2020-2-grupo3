@@ -1,75 +1,45 @@
 import { Request, Response } from "express"
 import { Avaliacao, AvaliacaoDocument } from "../models/avaliacaoModel"
-import {create, getAll, getById, getByFields, deleteById, replace, update} from "../service/avaliacaoService"
+import * as service from "../service/avaliacaoService"
 
 export async function getHandler(request: Request, response: Response) {
-    const serviceResponse = await getAll()
-    if (request.query){
+    if (request.query) {
         return getByQueryHandler(request, response)
     }
-    return response.json(serviceResponse).status(200).end()
+    const handler = await service.getAll()
+    return handler.handle(response);
 }
 
 export async function getByIdHandler(request: Request, response: Response) {
-    const id = request.params.id
-    const serviceResponse = await getById(id)
-    if(serviceResponse.data){
-        return response.json(serviceResponse.data).status(200).end()
-    } else if (serviceResponse.data === null){
-        return response.status(404).end()
-    } else {
-        return response.json({error: serviceResponse.error}).status(500).end()
-    }
+    const handler = await service.getById(request.params.id)
+    return handler.handle(response);
 }
 
 export async function getByQueryHandler(request: Request, response: Response) {
-    const serviceResponse = await getByFields(request.query)
-    if(serviceResponse.data){
-        return response.json(serviceResponse.data).status(200).end()
-    } else {
-        return response.json({error: serviceResponse.error}).status(404).end()
-    }
+    const handler = await service.getByFields(request.query)
+    return handler.handle(response);
 }
 
 export async function deleteHandler(request: Request, response: Response) {
     const id = request.params.id
-    const serviceResponse = await deleteById(id)
+    const serviceResponse = await service.deleteById(id)
     return serviceResponse ? response.status(200).end() : response.status(404).end()
 }
 
 export async function postHandler(request: Request, response: Response) {
-    const serviceResponse = await create(request.body as Avaliacao);
-    if(serviceResponse.data){
-        return response.json(serviceResponse.data).status(201).end()
-    } else {
-        return response.json({error: serviceResponse.error}).status(500).end()
-    }
+
+    const handler = await service.create(request.body as Avaliacao);
+    return handler.handle(response, 201);
 }
 
 export async function putHandler(request: Request, response: Response) {
     const avaliacao = request.body as AvaliacaoDocument
-    if(avaliacao._id){
-        const serviceResponse = await replace(avaliacao._id, avaliacao);
-        if(serviceResponse.data){
-            return response.json(serviceResponse.data).status(200).end()
-        } else {
-            return response.json({error: serviceResponse.error}).status(500).end()
-        }
-    } else {
-        return response.status(404).end()
-    }
+    const handler = await service.replace(avaliacao._id, avaliacao);
+    return handler.handle(response);
 }
 
 export async function patchHandler(request: Request, response: Response) {
     const avaliacao = request.body as AvaliacaoDocument
-    if(avaliacao._id){
-        const serviceResponse = await update(avaliacao._id, avaliacao);
-        if(serviceResponse.data){
-            return response.json(serviceResponse.data).status(200).end()
-        } else {
-            return response.json({error: serviceResponse.error}).status(500).end()
-        }
-    } else {
-        return response.status(404).end()
-    }
+    const handler = await service.update(avaliacao._id, avaliacao);
+    return handler.handle(response);
 }

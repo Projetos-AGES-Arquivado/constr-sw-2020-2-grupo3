@@ -1,31 +1,16 @@
-import { ServiceResponse } from '../models/models';
+import Handler from '../handlers/responseHandler';
 import avaliacaoModel, { Avaliacao, AvaliacaoDocument } from '../models/avaliacaoModel'
 
-export async function getAll(): Promise<any[]> {
-    return avaliacaoModel.find({});
+export async function getAll(): Promise<Handler<any[]>> {
+    return Handler.handleCatching(async () => await avaliacaoModel.find({}))
 }
 
-export async function getById(id: String): Promise<ServiceResponse<AvaliacaoDocument>> {
-    try {
-        const document = await avaliacaoModel.findById({ _id: id });
-        return { data: document as AvaliacaoDocument };
-    } catch (error) {
-        const message = (error instanceof Error) ? error.message : error
-        console.error(message)
-        return { error: message }
-    }
+export async function getById(id: String): Promise<Handler<AvaliacaoDocument>> {
+    return Handler.handleCatching(async () => await avaliacaoModel.findById({ _id: id }) as AvaliacaoDocument)
 }
 
-export async function getByFields(fields: any): Promise<ServiceResponse<any[]>> {
-    try {
-        const documents = await avaliacaoModel.find(fields);
-        return { data: documents };
-
-    } catch (error) {
-        const message = (error instanceof Error) ? error.message : error
-        console.error(message)
-        return { error: message }
-    }
+export async function getByFields(fields: any): Promise<Handler<any[]>> {
+    return Handler.handleCatching(async () => await avaliacaoModel.find(fields))
 }
 
 export async function deleteById(id: String): Promise<Boolean> {
@@ -35,30 +20,18 @@ export async function deleteById(id: String): Promise<Boolean> {
 
 export async function replace(id: String, avaliacao: Avaliacao): Promise<Handler<AvaliacaoDocument>> {
     return Handler.handleCatching(async () => {
-        const result = await avaliacaoModel.replaceOne({ _id: id }, avaliacao)
-        return result as AvaliacaoDocument
+        await avaliacaoModel.replaceOne({ _id: id }, avaliacao) as AvaliacaoDocument
+        return await avaliacaoModel.findById({ _id: id }) as AvaliacaoDocument
     })
 }
 
-export async function update(id: String, avaliacao: Avaliacao): Promise<ServiceResponse<AvaliacaoDocument>> {
-    try {
-        const document = await avaliacaoModel.updateOne({_id: id}, avaliacao)
-        return { data: document as AvaliacaoDocument }
-    } catch (error) {
-        const message = (error instanceof Error) ? error.message : error
-        console.error(message)
-        return { error: message }
-    }
+export async function update(id: String, avaliacao: Avaliacao): Promise<Handler<AvaliacaoDocument>> {
+    return Handler.handleCatching(async () => {
+        await avaliacaoModel.updateOne({ _id: id }, avaliacao) as AvaliacaoDocument
+        return await avaliacaoModel.findById({ _id: id }) as AvaliacaoDocument
+    })
 }
 
-export async function create(avaliacao: Avaliacao): Promise<ServiceResponse<AvaliacaoDocument>> {
-    const newEntity = new avaliacaoModel(avaliacao);
-    try {
-        const document = await newEntity.save()
-        return { data: document as AvaliacaoDocument }
-    } catch (error) {
-        const message = (error instanceof Error) ? error.message : error
-        console.error(message)
-        return { error: message }
-    }
+export async function create(avaliacao: Avaliacao): Promise<Handler<AvaliacaoDocument>> {
+    return Handler.handleCatching(async () => await new avaliacaoModel(avaliacao).save() as AvaliacaoDocument)
 }
