@@ -1,6 +1,15 @@
 ### Busca todas avaliações
 GET http://localhost:8000/api/v1/avaliacoes
 
+### Busca por id
+GET http://localhost:8000/api/v1/avaliacoes/5f7bfed329b80b2c74e56372
+
+### Busca por query
+GET http://localhost:8000/api/v1/avaliacoes?peso=1.5&nome=Teste&grau=2
+
+### Deleta por id
+DELETE http://localhost:8000/api/v1/avaliacoes/5f7bfed329b80b2c74e56372
+
 ### Criar avaliação
 POST http://localhost:8000/api/v1/avaliacoes
 Content-Type: application/json
@@ -18,4 +27,34 @@ Content-Type: application/json
         "enunciado": "Enunciado da questão 2",
         "resposta": "Resposta da questão 2"
     }]
+}
+
+### Atualiza totalmente a avaliação
+PUT http://localhost:8000/api/v1/avaliacoes
+Content-Type: application/json
+
+{
+    "peso": 2,
+    "_id": "5f7bfed929b80b2c74e56375",
+    "nome": "Teste",
+    "grau": 1,
+    "descricao": "Nova Descrição do teste",
+    "questoes": [
+        {
+        "_id": "5f7bcc402955f215bf3bd957",
+        "enunciado": "Enunciado da questão 1",
+        "resposta": "Resposta da questão 1"
+        }
+    ],
+    "__v": 0
+}
+
+### Atualiza parcialmente a avaliação
+PATCH  http://localhost:8000/api/v1/avaliacoes
+Content-Type: application/json
+
+{
+    "peso": 1,
+    "_id": "5f7bfed929b80b2c74e56375",
+    "nome": "Teste 2"
 }

@@ -15,11 +15,6 @@ export interface Avaliacao {
 export interface AvaliacaoDocument extends Avaliacao, mongoose.Document { }
 
 const schema = new mongoose.Schema({
-    id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        unique: true
-    },
     nome: {
         type: String,
         required: true,
@@ -52,6 +47,7 @@ const schema = new mongoose.Schema({
 
 schema.post('save', (error: MongoError, doc: AvaliacaoDocument, next: (err?: NativeError) => void) => {
     if (error.name === 'MongoError' && error.code === 11000) {
+        console.log(error)
         next(new Error('Chave Duplicada: verifique os dados'));
     } else {
         next(error);
