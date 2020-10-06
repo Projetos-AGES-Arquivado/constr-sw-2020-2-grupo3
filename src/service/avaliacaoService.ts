@@ -33,15 +33,11 @@ export async function deleteById(id: String): Promise<Boolean> {
     return (deleteCount && deleteCount > 0) ? true : false
 }
 
-export async function replace(id: String, avaliacao: Avaliacao): Promise<ServiceResponse<AvaliacaoDocument>> {
-    try {
-        const document = await avaliacaoModel.replaceOne({_id: id}, avaliacao)
-        return { data: document as AvaliacaoDocument }
-    } catch (error) {
-        const message = (error instanceof Error) ? error.message : error
-        console.error(message)
-        return { error: message }
-    }
+export async function replace(id: String, avaliacao: Avaliacao): Promise<Handler<AvaliacaoDocument>> {
+    return Handler.handleCatching(async () => {
+        const result = await avaliacaoModel.replaceOne({ _id: id }, avaliacao)
+        return result as AvaliacaoDocument
+    })
 }
 
 export async function update(id: String, avaliacao: Avaliacao): Promise<ServiceResponse<AvaliacaoDocument>> {
