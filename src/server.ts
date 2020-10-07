@@ -10,7 +10,7 @@ const expressSwagger = require('express-swagger-generator')(app);
 let options = {
     swaggerDefinition: {
         info: {
-            description: 'Serviço de gerar documentos',
+            description: 'API de Avaliações',
             title: 'Swagger',
             version: '1.0.0',
         },
