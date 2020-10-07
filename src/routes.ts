@@ -31,7 +31,7 @@ routes.get("/api/v1/avaliacoes/:id", controller.getByIdHandler)
 
 
 /**
- * Lista uma avaliação passando o id.
+ * Lista uma avaliação passando uma query.
  * @route GET /api/v1/avaliacoes?{query}
  * @group Avaliacao
  * @param {string} query.param - Query
