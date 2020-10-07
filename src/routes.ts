@@ -12,6 +12,7 @@ routes.get('/health', healthCheck);
  * Lista todas as avaliação.
  * @route GET /api/v1/avaliacoes
  * @group Avaliacao
+ * @param {string} query.param - Query
  * @produces application/json
  * @returns {Array.<Avaliacao>} 200 - OK
  */
@@ -28,19 +29,6 @@ routes.get("/api/v1/avaliacoes", controller.getHandler)
  */
 //lista um objeto
 routes.get("/api/v1/avaliacoes/:id", controller.getByIdHandler)
-
-
-/**
- * Lista uma avaliação passando uma query.
- * @route GET /api/v1/avaliacoes?{query}
- * @group Avaliacao
- * @param {string} query.param - Query
- * @produces application/json
- * @returns {Array.<Avaliacao>} 200 - OK
- */
-//lista um objeto
-routes.get("/api/v1/avaliacoes", controller.getByQueryHandler)
-
 
 /**
  * Atualiza a avalição.
