@@ -16,7 +16,7 @@ let options = {
         },
         basePath: '',
         produces: [],
-        schemes: ['https', 'http']
+        schemes: ['http', 'https']
     },
     basedir: __dirname, //app absolute path
     files: ['./routes.ts'] //Path to the API handle folder
