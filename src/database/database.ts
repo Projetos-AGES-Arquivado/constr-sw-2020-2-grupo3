@@ -2,6 +2,9 @@ import mongoose, { ConnectionStates } from 'mongoose'
 
 export default (url: String) => {
   mongoose.connect(`mongodb://${url}/avaliacoes`, {
+    authSource: "admin",
+    user: "root",
+    pass: "DdgIgrp3",
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
