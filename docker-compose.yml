@@ -2,6 +2,7 @@ version: '3'
 services:
   mongo-express:
     image: mongo-express
+    container_name: mongo-express
     ports:
       - 8081:8081
     environment:
@@ -16,17 +17,35 @@ services:
       - mongo-compose-network
   mongo:
     image: mongo
+    container_name: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: DdgIgrp3
     ports:
-      - "27017:27017"
+      - 27017:27017
     volumes:
-      - ./home/ubuntu/home:/home/mongodb
-      - ./home/ubuntu/MongoDB:/data/db
+      - mongodb_volume:/home/mongodb
+      - mongodb_data_volume:/data/db
+    networks:
+      - mongo-compose-network
+  api:
+    image: avaliacao:latest
+    container_name: avaliacao_api
+    environment:
+      NODE_ENV: production
+      MONGODB_URL: mongo
+      MONGODB_AUTH_SOURCE: admin
+      MONGODB_USER: root
+      MONGODB_PASS: DdgIgrp3
+    ports:
+      - 8000:8000
     networks:
       - mongo-compose-network
 
+volumes:
+  mongodb_volume:
+  mongodb_data_volume:
+
 networks:
-    mongo-compose-network:
-      driver: bridge
+  mongo-compose-network:
+    driver: bridge

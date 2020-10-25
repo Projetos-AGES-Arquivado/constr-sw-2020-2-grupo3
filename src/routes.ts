@@ -1,12 +1,11 @@
-import express from 'express'
+import express from 'express';
 import * as controller from './controllers/avaliacaoController';
 import healthCheck from './controllers/healthController';
 
 const routes = express.Router();
 
-//HealthController
+// HealthController
 routes.get('/health', healthCheck);
-
 
 /**
  * Lista todas as avaliação.
@@ -16,8 +15,8 @@ routes.get('/health', healthCheck);
  * @produces application/json
  * @returns {Array.<Avaliacao>} 200 - OK
  */
-//lista todos os objetos
-routes.get("/api/v1/avaliacoes", controller.getHandler)
+// lista todos os objetos
+routes.get('/api/v1/avaliacoes', controller.getHandler);
 
 /**
  * Lista uma avaliação passando o id.
@@ -27,8 +26,8 @@ routes.get("/api/v1/avaliacoes", controller.getHandler)
  * @produces application/json
  * @returns {Avaliacao.model} 200 - OK
  */
-//lista um objeto
-routes.get("/api/v1/avaliacoes/:id", controller.getByIdHandler)
+// lista um objeto
+routes.get('/api/v1/avaliacoes/:id', controller.getByIdHandler);
 
 /**
  * Atualiza a avalição.
@@ -39,9 +38,8 @@ routes.get("/api/v1/avaliacoes/:id", controller.getByIdHandler)
  * @returns 200 - OK
  * @returns 404 - NOT FOUND: objeto não encontrado
  */
-//exclui o objeto com aquele id
-routes.delete("/api/v1/avaliacoes/:id", controller.deleteHandler)
-
+// exclui o objeto com aquele id
+routes.delete('/api/v1/avaliacoes/:id', controller.deleteHandler);
 
 /**
  * Insere uma avaliação.
@@ -52,9 +50,8 @@ routes.delete("/api/v1/avaliacoes/:id", controller.deleteHandler)
  * @returns {Avaliacao.model} 201 - CREATED
  * @returns 302 - FOUND: objeto já existente
  */
-//insere um objeto
-routes.post("/api/v1/avaliacoes", controller.postHandler)
-
+// insere um objeto
+routes.post('/api/v1/avaliacoes', controller.postHandler);
 
 /**
  * Atualiza a avalição.
@@ -66,9 +63,8 @@ routes.post("/api/v1/avaliacoes", controller.postHandler)
  * @returns 200 - OK
  * @returns 404 - NOT FOUND: objeto não encontrado
  */
-//atualiza o objeto com aquele id
-routes.put("/api/v1/avaliacoes/:id", controller.putHandler)
-
+// atualiza o objeto com aquele id
+routes.put('/api/v1/avaliacoes/:id', controller.putHandler);
 
 /**
  * Atualiza parcialmente a avalição.
@@ -80,17 +76,13 @@ routes.put("/api/v1/avaliacoes/:id", controller.putHandler)
  * @returns 200 - OK
  * @returns 404 - NOT FOUND: objeto não encontrado
  */
-//atualiza parcialmente o objeto com aquele id
-routes.patch("/api/v1/avaliacoes/:id", controller.patchHandler)
+// atualiza parcialmente o objeto com aquele id
+routes.patch('/api/v1/avaliacoes/:id', controller.patchHandler);
 
-
-
-//redirect para o swagger
-routes.get('/', function(req, res, next) {
-    res.redirect('api-docs');
+// redirect para o swagger
+routes.get('/', (req, res) => {
+  res.redirect('api-docs');
 });
-
-
 
 /**
  * @typedef Avaliacao
@@ -101,12 +93,10 @@ routes.get('/', function(req, res, next) {
  * @property {Array.<Questao>} questoes - Questões da avaliação
  */
 
-
 /**
  * @typedef Questao
  * @property {string} enunciado.required - Enunciado da questão - eg: Qual a alternativa correta? A) B)
  * @property {string} resposta.required - Resposta da questão - eg: A)
  */
-
 
 export default routes;

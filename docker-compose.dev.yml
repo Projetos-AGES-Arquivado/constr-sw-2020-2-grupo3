@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_volume:/home/mongodb
+      - mongodb_data_volume:/data/db
+volumes:
+  mongodb_volume:
+  mongodb_data_volume:
