@@ -21,6 +21,11 @@ export async function getByIdHandler(request: Request, response: Response): Prom
   handler.handle(response);
 }
 
+export async function getByIdAulaHandler(request: Request, response: Response): Promise<void> {
+  const handler = await service.getByIdAula(request.params.id);
+  handler.handle(response);
+}
+
 export async function deleteHandler(request: Request, response: Response): Promise<void> {
   const { id } = request.params;
   if (await service.deleteById(id)) {

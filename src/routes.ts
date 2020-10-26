@@ -15,7 +15,6 @@ routes.get('/health', healthCheck);
  * @produces application/json
  * @returns {Array.<Avaliacao>} 200 - OK
  */
-// lista todos os objetos
 routes.get('/api/v1/avaliacoes', controller.getHandler);
 
 /**
@@ -26,8 +25,17 @@ routes.get('/api/v1/avaliacoes', controller.getHandler);
  * @produces application/json
  * @returns {Avaliacao.model} 200 - OK
  */
-// lista um objeto
 routes.get('/api/v1/avaliacoes/:id', controller.getByIdHandler);
+
+/**
+ * Lista todas as avaliação.
+ * @route GET /api/v1/avaliacoes
+ * @group Avaliacao
+ * @param {number} id.path.required - ID da aula
+ * @produces application/json
+ * @returns {Array.<Avaliacao>} 200 - OK
+ */
+routes.get('/api/v1/avaliacoes/aula/:id', controller.getByIdAulaHandler);
 
 /**
  * Atualiza a avalição.
@@ -38,7 +46,6 @@ routes.get('/api/v1/avaliacoes/:id', controller.getByIdHandler);
  * @returns 200 - OK
  * @returns 404 - NOT FOUND: objeto não encontrado
  */
-// exclui o objeto com aquele id
 routes.delete('/api/v1/avaliacoes/:id', controller.deleteHandler);
 
 /**
@@ -50,7 +57,6 @@ routes.delete('/api/v1/avaliacoes/:id', controller.deleteHandler);
  * @returns {Avaliacao.model} 201 - CREATED
  * @returns 302 - FOUND: objeto já existente
  */
-// insere um objeto
 routes.post('/api/v1/avaliacoes', controller.postHandler);
 
 /**
@@ -63,7 +69,6 @@ routes.post('/api/v1/avaliacoes', controller.postHandler);
  * @returns 200 - OK
  * @returns 404 - NOT FOUND: objeto não encontrado
  */
-// atualiza o objeto com aquele id
 routes.put('/api/v1/avaliacoes/:id', controller.putHandler);
 
 /**
@@ -76,7 +81,6 @@ routes.put('/api/v1/avaliacoes/:id', controller.putHandler);
  * @returns 200 - OK
  * @returns 404 - NOT FOUND: objeto não encontrado
  */
-// atualiza parcialmente o objeto com aquele id
 routes.patch('/api/v1/avaliacoes/:id', controller.patchHandler);
 
 // redirect para o swagger
@@ -91,6 +95,7 @@ routes.get('/', (req, res) => {
  * @property {number} grau - Grau da avaliação - eg: 9
  * @property {string} descricao - Descrição da avaliação - eg: Primeira avaliação da cadeira de Construção de Software 2020/2
  * @property {Array.<Questao>} questoes - Questões da avaliação
+ * @property {Array.string} aulas - Ids de aulas onde as avaliação foi aplicada - eg: ["aula1", "aula2", "aula3"]
  */
 
 /**

@@ -12,6 +12,7 @@ export interface Avaliacao {
       resposta: string;
     },
   ];
+  aulas: Array<string>;
 }
 
 export interface AvaliacaoDocument extends Avaliacao, mongoose.Document {}
@@ -47,6 +48,7 @@ const schema = new mongoose.Schema({
       },
     },
   ],
+  aulas: [{ type: String, required: false }],
 });
 
 schema.post('save', (error: MongoError, doc: AvaliacaoDocument, next: (err?: NativeError) => void) => {

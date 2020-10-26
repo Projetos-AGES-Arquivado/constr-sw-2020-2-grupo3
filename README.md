@@ -8,6 +8,7 @@
 
 - Internamente
 
+  - http://{servidor}:8000/
   - http://{servidor}:8000/api-docs
 
 - Externamente
@@ -15,9 +16,7 @@
   - Para acessar o swagger do projeto de forma externa é necessário inserir o arquivo _swagger.yaml_ do projeto no editor do swagger ou adicionalo via URL.
 
   - https://editor.swagger.io/
-
-  - URL => http://{servidor}:8000/static/swagger.yaml
-
+  - http://{servidor}:8000/static/swagger.yaml
   - [Abrir arquivo Swagger do projeto](public/swagger.yaml)
 
 # Execução Desenvolvimento

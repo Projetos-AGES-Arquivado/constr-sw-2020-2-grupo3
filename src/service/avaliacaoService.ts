@@ -11,6 +11,10 @@ export async function getById(id: string): Promise<Handler<AvaliacaoDocument>> {
   return Handler.handleCatching(async () => (await AvaliacaoModel.findById({ _id: id })) as AvaliacaoDocument);
 }
 
+export async function getByIdAula(idAula: string): Promise<Handler<Document[]>> {
+  return Handler.handleCatching(async () => AvaliacaoModel.find({ aulas: idAula }));
+}
+
 export async function getByFields(fields: ParsedQs): Promise<Handler<Document[]>> {
   return Handler.handleCatching(async () => AvaliacaoModel.find(fields));
 }

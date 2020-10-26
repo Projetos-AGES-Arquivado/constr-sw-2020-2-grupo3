@@ -5,13 +5,16 @@ GET http://localhost:8000/health
 GET http://localhost:8000/api/v1/avaliacoes
 
 ### Busca por id
-GET http://localhost:8000/api/v1/avaliacoes/5f94dd747f9dd9092a06227d
+GET http://localhost:8000/api/v1/avaliacoes/5f9742a6c9007921c3f0a599
+
+### Busca por id aula
+GET http://localhost:8000/api/v1/avaliacoes/aula/aula1
 
 ### Busca por query
 GET http://localhost:8000/api/v1/avaliacoes?peso=1.5&nome=Teste&grau=2
 
 ### Deleta por id
-DELETE http://localhost:8000/api/v1/avaliacoes/5f94dd747f9dd9092a06227d
+DELETE http://localhost:8000/api/v1/avaliacoes/5f9742a6c9007921c3f0a599
 
 ### Criar avaliação
 POST http://localhost:8000/api/v1/avaliacoes
@@ -29,16 +32,20 @@ Content-Type: application/json
     {
         "enunciado": "Enunciado da questão 2",
         "resposta": "Resposta da questão 2"
-    }]
+    }],
+    "aulas": [
+        "aula1",
+        "aula2",
+        "aula3"
+    ]
 }
 
 ### Atualiza totalmente a avaliação
-PUT http://localhost:8000/api/v1/avaliacoes
+PUT http://localhost:8000/api/v1/avaliacoes/5f9742a6c9007921c3f0a599
 Content-Type: application/json
 
 {
     "peso": 2,
-    "_id": "5f7bfed929b80b2c74e56375",
     "nome": "Teste",
     "grau": 1,
     "descricao": "Nova Descrição do teste",
@@ -49,15 +56,20 @@ Content-Type: application/json
         "resposta": "Resposta da questão 1"
         }
     ],
+        "aulas": [
+        "aula1"
+    ],
     "__v": 0
 }
 
 ### Atualiza parcialmente a avaliação
-PATCH  http://localhost:8000/api/v1/avaliacoes
+PATCH  http://localhost:8000/api/v1/avaliacoes/5f9742a6c9007921c3f0a599
 Content-Type: application/json
 
 {
     "peso": 1,
-    "_id": "5f7bfed929b80b2c74e56375",
-    "nome": "Teste 2"
+    "nome": "Teste 2",
+    "aulas": [
+        "aula"
+    ],
 }
