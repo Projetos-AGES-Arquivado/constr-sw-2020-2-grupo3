@@ -26,14 +26,14 @@ export async function deleteById(id: string): Promise<boolean> {
 
 export async function replace(id: string, avaliacao: Avaliacao): Promise<Handler<AvaliacaoDocument>> {
   return Handler.handleCatching(async () => {
-    await AvaliacaoModel.replaceOne({ _id: id }, avaliacao);
+    await AvaliacaoModel.replaceOne({ _id: id }, { ...avaliacao, _id: id });
     return (await AvaliacaoModel.findById({ _id: id })) as AvaliacaoDocument;
   });
 }
 
 export async function update(id: string, avaliacao: Avaliacao): Promise<Handler<AvaliacaoDocument>> {
   return Handler.handleCatching(async () => {
-    (await AvaliacaoModel.updateOne({ _id: id }, avaliacao)) as AvaliacaoDocument;
+    await AvaliacaoModel.updateOne({ _id: id }, { ...avaliacao, _id: id });
     return (await AvaliacaoModel.findById({ _id: id })) as AvaliacaoDocument;
   });
 }
