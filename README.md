@@ -4,13 +4,21 @@
 
 - Grupo responsável pela parte de avaliações do projeto da disciplina.
 
-## Arquivo Swagger do projeto
+## Swagger do projeto
 
-- Para acessar o swagger do projeto é necessário inserir o arquivo _swagger.yaml_ do projeto no editor do swagger.
+- Internamente
 
-- https://editor.swagger.io/
+  - http://{servidor}:8000/api-docs
 
-- [Abrir arquivo Swagger do projeto](public/swagger.yaml)
+- Externamente
+
+  - Para acessar o swagger do projeto de forma externa é necessário inserir o arquivo _swagger.yaml_ do projeto no editor do swagger ou adicionalo via URL.
+
+  - https://editor.swagger.io/
+
+  - URL => http://{servidor}:8000/static/swagger.yaml
+
+  - [Abrir arquivo Swagger do projeto](public/swagger.yaml)
 
 # Execução Desenvolvimento
 
