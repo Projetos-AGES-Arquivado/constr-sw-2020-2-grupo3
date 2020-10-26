@@ -1,35 +1,32 @@
-import mongoose, { ConnectionStates } from 'mongoose'
+import mongoose, { Connection } from 'mongoose';
 
-export default (url: String) => {
+export default function connect(url: string): Connection {
   mongoose.connect(`mongodb://${url}/avaliacoes`, {
-    authSource: "admin",
-    user: "root",
-    pass: "DdgIgrp3",
+    authSource: process.env.MONGODB_AUTH_SOURCE,
+    user: process.env.MONGODB_USER,
+    pass: process.env.MONGODB_PASS,
     useCreateIndex: true,
     useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+    useUnifiedTopology: true,
+  });
 
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
-  db.on('open', function () {
-    console.log("Database connected")
-  });
+  db.on('open', () => console.log('Database connected'));
   return db;
 }
 
-export function status(): String {
+export function status(): string {
   switch (mongoose.connection.readyState) {
     case 0:
-      return "disconnected";
+      return 'disconnected';
     case 1:
-      return "connected"
+      return 'connected';
     case 2:
-      return "connecting"
+      return 'connecting';
     case 3:
-      return "disconnecting"
+      return 'disconnecting';
     default:
-      return "Unknown"
+      return 'Unknown';
   }
 }
-

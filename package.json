@@ -1,35 +1,44 @@
 {
-  "name": "avaliacoes",
-  "version": "1.0.0",
-  "description": "Contrucao de software grupo 3",
-  "main": "index.js",
-  "scripts": {
-    "start": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo3.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo3/issues"
-  },
-  "homepage": "https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo3#readme",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-swagger-generator": "^1.1.17",
-    "mongoose": "^5.10.6"
-  },
-  "devDependencies": {
-    "@types/body-parser": "^1.19.0",
-    "@types/cors": "^2.8.7",
-    "@types/express": "^4.17.8",
-    "@types/mongoose": "^5.7.36",
-    "ts-node-dev": "^1.0.0-pre.63",
-    "typescript": "^4.0.3"
-  }
+    "name": "avaliacoes",
+    "version": "1.0.0",
+    "description": "Contrucao de software grupo 3",
+    "main": "index.js",
+    "scripts": {
+        "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+        "build": "tsc -p ./tsconfig.json",
+        "start": "node dist/server.js",
+        "lint": "eslint --fix ./src/*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo3.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo3/issues"
+    },
+    "homepage": "https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo3#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-swagger-generator": "^1.1.17",
+        "mongoose": "^5.10.6"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.7",
+        "@types/express": "^4.17.8",
+        "@types/mongoose": "^5.7.36",
+        "@typescript-eslint/eslint-plugin": "^4.5.0",
+        "@typescript-eslint/parser": "^4.5.0",
+        "eslint": "^7.12.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-config-prettier": "^6.14.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-prettier": "^3.1.4",
+        "prettier": "^2.1.2",
+        "ts-node-dev": "^1.0.0-pre.63",
+        "typescript": "^4.0.3"
+    }
 }

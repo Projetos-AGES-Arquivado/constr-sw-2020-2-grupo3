@@ -1,36 +1,36 @@
-import express from 'express'
-import cors from 'cors'
-import { json } from 'body-parser'
+import express from 'express';
+import cors from 'cors';
 import routes from './routes';
-import database from './database/database'
+import database from './database/database';
 
-const app = express()
-const expressSwagger = require('express-swagger-generator')(app);
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use('/static', express.static('public'));
+app.use(routes);
 
-let options = {
-    swaggerDefinition: {
-        info: {
-            description: 'API de Avaliações',
-            title: 'Swagger',
-            version: '1.0.0',
-        },
-        basePath: '',
-        produces: [],
-        schemes: ['http', 'https']
-    },
-    basedir: __dirname, //app absolute path
-    files: ['./routes.ts'] //Path to the API handle folder
-};
-expressSwagger(options);
+const ENV = process.env.NODE_ENV || 'development';
+console.log(`ENV: ${ENV}`);
 
+const MONGODB_URL = process.env.MONGODB_URL || '0.0.0.0';
+database(MONGODB_URL);
 
-app.use(cors())
-app.use(json())
-app.use(routes)
-
-database("localhost:27017");
-
-const port = 8000
+const port = 8000;
 app.listen(port, () => {
-    console.log(`Server running: http://localhost:${8000}/health`)
+  console.log(`Server running on: http://0.0.0.0:${port}`);
+});
+
+require('express-swagger-generator')(app)({
+  swaggerDefinition: {
+    info: {
+      description: 'API de Avaliações',
+      title: 'Swagger',
+      version: '1.0.0',
+    },
+    basePath: '',
+    produces: [],
+    schemes: ['http', 'https'],
+  },
+  basedir: __dirname,
+  files: ['./routes.ts'],
 });
