@@ -14,7 +14,7 @@ GET http://localhost:8000/api/v1/avaliacoes/aula/aula1
 GET http://localhost:8000/api/v1/avaliacoes?peso=1.5&nome=Teste&grau=2
 
 ### Deleta por id
-DELETE http://localhost:8000/api/v1/avaliacoes/5f9742a6c9007921c3f0a599
+DELETE http://localhost:8000/api/v1/avaliacoes/5f974e5a964fef2e563f9970
 
 ### Criar avaliação
 POST http://localhost:8000/api/v1/avaliacoes
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ### Atualiza totalmente a avaliação
-PUT http://localhost:8000/api/v1/avaliacoes/5f9742a6c9007921c3f0a599
+PUT http://localhost:8000/api/v1/avaliacoes/5f974e5a964fef2e563f9970
 Content-Type: application/json
 
 {
@@ -63,13 +63,13 @@ Content-Type: application/json
 }
 
 ### Atualiza parcialmente a avaliação
-PATCH  http://localhost:8000/api/v1/avaliacoes/5f9742a6c9007921c3f0a599
+PATCH  http://localhost:8000/api/v1/avaliacoes/5f974e5a964fef2e563f9970
 Content-Type: application/json
 
 {
     "peso": 1,
-    "nome": "Teste 2",
+    "nome": "Teste",
     "aulas": [
         "aula"
-    ],
+    ]
 }

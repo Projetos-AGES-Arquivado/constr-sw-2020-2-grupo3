@@ -27,8 +27,7 @@ export async function getByIdAulaHandler(request: Request, response: Response): 
 }
 
 export async function deleteHandler(request: Request, response: Response): Promise<void> {
-  const { id } = request.params;
-  if (await service.deleteById(id)) {
+  if (await service.deleteById(request.params.id)) {
     response.status(200).end();
   } else {
     response.status(404).end();
@@ -42,12 +41,12 @@ export async function postHandler(request: Request, response: Response): Promise
 
 export async function putHandler(request: Request, response: Response): Promise<void> {
   const avaliacao = request.body as AvaliacaoDocument;
-  const handler = await service.replace(avaliacao._id, avaliacao);
+  const handler = await service.replace(request.params.id, avaliacao);
   handler.handle(response);
 }
 
 export async function patchHandler(request: Request, response: Response): Promise<void> {
   const avaliacao = request.body as AvaliacaoDocument;
-  const handler = await service.update(avaliacao._id, avaliacao);
+  const handler = await service.update(request.params.id, avaliacao);
   handler.handle(response);
 }

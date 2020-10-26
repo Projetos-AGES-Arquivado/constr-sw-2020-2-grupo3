@@ -29,7 +29,7 @@ routes.get('/api/v1/avaliacoes/:id', controller.getByIdHandler);
 
 /**
  * Lista todas as avaliação.
- * @route GET /api/v1/avaliacoes
+ * @route GET /api/v1/avaliacoes/aula/:id
  * @group Avaliacao
  * @param {number} id.path.required - ID da aula
  * @produces application/json
