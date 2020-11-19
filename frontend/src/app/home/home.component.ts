@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 import { User } from '@app/_models';
 import { UserService, AuthenticationService } from '@app/_services';
 
@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     constructor(
         private authenticationService: AuthenticationService,
-        private userService: UserService
+        private userService: UserService,
+        private router: Router
     ) {
         this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
@@ -29,9 +30,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.currentUserSubscription.unsubscribe();
     }
 
+    navigate() {
+        this.router.navigate(['/disciplinas']);
+    }
+
     deleteUser(id: number) {
         this.userService.delete(id).pipe(first()).subscribe(() => {
-            this.loadAllUsers()
+            this.loadAllUsers();
         });
     }
 
