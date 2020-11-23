@@ -1,0 +1,30 @@
+.form-content {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 100%;
+}
+
+.form-buttons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.form-buttons button {
+  border-radius: 8px;
+  color: #FFF;
+  border: none;
+  width: 100%;
+  height: 60px;
+  cursor: pointer;
+}
+
+.form-buttons .discart {
+  background: #FF4D57;
+  margin-right: 25px;
+}
+
+.form-buttons .submit {
+  background: #1976D2;
+}
