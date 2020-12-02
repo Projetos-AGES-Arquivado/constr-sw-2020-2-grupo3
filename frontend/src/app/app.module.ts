@@ -12,6 +12,7 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatSnackBarModule,
+  MatSortModule
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -54,7 +55,8 @@ import { FormComponent } from './form';
       MatPaginatorModule,
       NoopAnimationsModule,
       FormsModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatSortModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

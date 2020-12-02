@@ -33,4 +33,9 @@ export class DisciplinaService {
     const { _id, bibliografia, ...data } = element;
     return this.http.put<IDisciplina[]>(`${this.disciplinaApiUrl}/${_id}`, { ...data, bibliografia: [bibliografia]})
   }
+
+  deleteDisciplina(element): Observable<IDisciplina[]> {
+    const { _id } = element;
+    return this.http.delete<IDisciplina[]>(`${this.disciplinaApiUrl}/${_id}`)
+  }
 }

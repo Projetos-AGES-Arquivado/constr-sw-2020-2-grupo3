@@ -1,36 +1,37 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit(form.value)" class="form-content">
   <mat-form-field appearance="outline">
     <mat-label>Nome</mat-label>
-    <input required formControlName="nome" [name]="nome" matInput>
+    <input readonly="onlyView" required formControlName="nome" [name]="nome" matInput>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Código</mat-label>
-    <input minlength="5" minlength="5" type="number" required formControlName="codigo" [name]="codigo" matInput>
+    <input readonly="onlyView" minlength="5" minlength="5" type="number" required formControlName="codigo" [name]="codigo" matInput>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Ementa (resumida)</mat-label>
-    <input required formControlName="ementa" [name]="ementa" matInput>
+    <input readonly="onlyView" required formControlName="ementa" [name]="ementa" matInput>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Créditos</mat-label>
-    <input minlength="2" minlength="2" type="number" required formControlName="creditos" [name]="creditos" matInput>
+    <input readonly="onlyView" minlength="2" minlength="2" type="number" required formControlName="creditos" [name]="creditos" matInput>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Objetivos</mat-label>
-    <input required formControlName="objetivos" [name]="objetivos" matInput>
+    <input readonly="onlyView" required formControlName="objetivos" [name]="objetivos" matInput>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Bibliografia</mat-label>
-    <input required formControlName="bibliografia" [name]="bibliografia" matInput>
+    <input readonly="onlyView" required formControlName="bibliografia" [name]="bibliografia" matInput>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Turma</mat-label>
-    <input required formControlName="turma" [name]="turma" matInput>
+    <input readonly="onlyView" required formControlName="turma" [name]="turma" matInput>
   </mat-form-field>
 
   <div class="form-buttons">
-    <button type="button" (click)="closeDialog()" *ngIf="element?._id" mat-raised-button class="discart">Descartar alterações</button>
-    <button type="submit" mat-raised-button class="submit">{{ element?._id ? 'Salvar' : 'Cadastrar' }}</button>
+    <button *ngIf="!onlyView" type="button" (click)="closeDialog()" mat-raised-button class="discart">Descartar alterações</button>
+    <button *ngIf="!onlyView" type="submit" mat-raised-button class="submit">{{ element?._id ? 'Salvar' : 'Cadastrar' }}</button>
+    <button *ngIf="onlyView" type="button" (click)="closeDialog()" mat-raised-button class="submit">Fechar</button>
   </div>
 
 </form>

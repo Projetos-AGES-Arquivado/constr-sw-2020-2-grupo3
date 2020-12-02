@@ -4,7 +4,7 @@ import { OnInit } from '@angular/core';
 import { IDisciplina } from './interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar, MatSort } from '@angular/material';
 
 import { FormComponent } from "../form";
 
@@ -17,9 +17,10 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'Disciplinas';
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null;
+  @ViewChild(MatSort) sort: MatSort;
 
   dataSource: MatTableDataSource<IDisciplina>;
-  columns: string[] = ["edit", "nome", "codigo", "creditos", "turma"];
+  columns: string[] = ["nome", "codigo", "creditos", "turma", "edit", "delete"];
 
   constructor(private disciplinaService: DisciplinaService, private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource();
@@ -28,13 +29,18 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  ngOnInit() {
+  getDisciplinas() {
+    console.log('>>> aqui')
     this.disciplinaService.getDisciplinas().subscribe(response => {
       this.dataSource.data = response;
     })
+  }
 
+  ngOnInit() {
+    this.getDisciplinas();
   }
 
   search(event: Event) {
@@ -60,6 +66,7 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
     this.disciplinaService[action](element).subscribe(response => {
       console.log('response :>> ', response);
       this.closeDialog();
+      this.getDisciplinas();
     },
     error => this.openSnackBar('Ops! Ocorreu um erro'))
   }
@@ -76,7 +83,7 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dialog.open(FormComponent, dialogConfig);
   }
 
-  editDisciplinas(element) {
+  editDisciplina(element) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
@@ -85,6 +92,35 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
       element
     };
     this.dialog.open(FormComponent, dialogConfig);
+  }
+
+  openDetail(element) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      closeDialog: this.closeDialog.bind(this),
+      element,
+      onlyView: true
+    };
+    this.dialog.open(FormComponent, dialogConfig);
+  }
+
+  deleteDisciplina(element) {
+    if (!element) {
+      return
+    }
+
+    this.disciplinaService.deleteDisciplina(element).subscribe(response => {
+      console.log('response :>> ', response);
+      this.getDisciplinas();
+    },
+    error => {
+      if (error === 'OK') {
+        this.getDisciplinas();
+        return
+      }
+      this.openSnackBar('Ops! Ocorreu um erro')
+    })
   }
 
   closeDialog() {

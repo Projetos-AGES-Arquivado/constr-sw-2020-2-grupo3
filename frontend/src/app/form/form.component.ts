@@ -13,11 +13,14 @@ export class FormComponent implements OnInit {
   element: {};
   handleSubmit: void;
   closeDialog: void;
+  onlyView: boolean;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any = {}, private formBuilder: FormBuilder,) {
     this.handleSubmit = data.handleSubmit;
     this.closeDialog = data.closeDialog;
+    this.onlyView = data.onlyView;
 
     this.element = data.element || {};
+
     this.form = this.formBuilder.group(data.element || {
       _id: '',
       nome: '',
@@ -35,14 +38,3 @@ export class FormComponent implements OnInit {
   }
 
 }
-// form: IDisciplina = {
-//   _id: '',
-//   nome: '',
-//   objetivos: '',
-//   ementa: '',
-//   bibliografia: '',
-//   codigo: null,
-//   creditos: null,
-//   turma: '',
-//   criado: null
-// };

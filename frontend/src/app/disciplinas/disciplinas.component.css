@@ -21,13 +21,8 @@
   top: 5%;
 }
 
-.page-title {
-  /* font-family: Exo 2; */
-  font-size: 50px;
-  font-weight: 700;
-  line-height: 60px;
-  margin-bottom: 60px;
-  color: #41414D;
+.openDetail {
+  cursor: pointer;
 }
 
 .content {
@@ -39,17 +34,17 @@
   max-width: 1050px;
 }
 
-.content-header {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  max-width: 1050px;
+  margin-bottom: 40px;
 }
 
-.content-title {
-  color: #000;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24px;
+.header .mat-form-field {
+  width: 450px;
 }
 
 .mat-table {
@@ -63,14 +58,17 @@
 .content-footer {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
+  position: relative;
   margin-top: 15px;
 }
 
 .btn-add {
-  width: 50px;
-  height: 50px;
-  background: #1976D2;
+  position: absolute;
+  right: 10px;
+  width: 56px;
+  height: 56px;
+  background: #80CBC4;
   border-radius: 100%;
   border: none;
   display: flex;
@@ -78,19 +76,19 @@
   align-items: center;
   cursor: pointer;
   margin-left: 40px;
+  filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14)), drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12)), drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2));
 }
 
 .btn-add p {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: 30px;
   color: white;
   margin: 0;
-  padding-bottom: 7px;
 }
 
-.pencil {
+.icon {
   cursor: pointer;
   border: none;
   background: transparent;

@@ -8,9 +8,25 @@ html, body, app, disciplinas {
   height: 100%;
 }
 
+* {
+  font-family: Roboto;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 60px;
+  color: #41414D;
+}
+
 .mat-dialog-container {
   background: #F0F0F5;
   padding: 30px 60px 0 !important;
   border-radius: 12px !important;
   height: 90vh !important;
+}
+
+.mat-tab-group, .mat-tab-body-wrapper {
+  width: 100%;
+  height: 100%;
 }
