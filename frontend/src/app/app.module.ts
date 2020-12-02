@@ -12,7 +12,9 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatSnackBarModule,
-  MatSortModule
+  MatSortModule,
+  MatExpansionModule,
+  MatCheckboxModule,
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -56,7 +58,9 @@ import { FormComponent } from './form';
       NoopAnimationsModule,
       FormsModule,
       MatSnackBarModule,
-      MatSortModule
+      MatSortModule,
+      MatExpansionModule,
+      MatCheckboxModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

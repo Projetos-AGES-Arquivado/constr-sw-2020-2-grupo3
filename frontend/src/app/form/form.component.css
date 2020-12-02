@@ -28,3 +28,12 @@
 .form-buttons .submit {
   background: #1976D2;
 }
+
+.mat-expansion-panel {
+  background-color: transparent;
+  margin-bottom: 30px !important;
+}
+
+.mat-expansion-panel .mat-form-field {
+  width: 100%;
+}

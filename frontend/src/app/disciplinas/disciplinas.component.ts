@@ -1,7 +1,8 @@
 import { Component, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { DisciplinaService } from './disciplinas.service';
 import { OnInit } from '@angular/core';
-import { IDisciplina } from './interfaces';
+import { DisciplinaService } from '../_services/disciplinas.service';
+import { TurmaService } from '../_services/turmas.service';
+import { IDisciplina, ITurma } from '../_services/interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig, MatSnackBar, MatSort } from '@angular/material';
@@ -20,9 +21,10 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: MatTableDataSource<IDisciplina>;
-  columns: string[] = ["nome", "codigo", "creditos", "turma", "edit", "delete"];
+  columns: string[] = ["nome", "codigo", "creditos", "edit", "delete"];
+  turmas: ITurma[];
 
-  constructor(private disciplinaService: DisciplinaService, private dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private disciplinaService: DisciplinaService, private turmaService:TurmaService, private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource();
     this.paginator = null;
   }
@@ -32,15 +34,23 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  getTurmas() {
+    this.turmaService.getTurmas().subscribe(response => {
+      console.log('response :>> ', response);
+      this.turmas = response;
+    })
+  }
+
   getDisciplinas() {
-    console.log('>>> aqui')
     this.disciplinaService.getDisciplinas().subscribe(response => {
+      console.log('response :>> ', response);
       this.dataSource.data = response;
     })
   }
 
   ngOnInit() {
     this.getDisciplinas();
+    this.getTurmas();
   }
 
   search(event: Event) {

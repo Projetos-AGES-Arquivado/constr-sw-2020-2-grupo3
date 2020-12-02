@@ -8,34 +8,28 @@ import { IDisciplina } from './interfaces';
 })
 export class DisciplinaService {
 
-  disciplinaApiUrl: string;
-  turmaApiUrl: string;
+  apiUrl: string;
   constructor(private http: HttpClient) {
-    this.disciplinaApiUrl = "http://localhost:3333/disciplinas"
-    this.turmaApiUrl = "http://ec2-34-238-114-89.compute-1.amazonaws.com:3000/turma"
+    this.apiUrl = "http://localhost:3333/disciplinas"
     // this.apiUrl = "http://ec2-3-135-209-171.us-east-2.compute.amazonaws.com:3333/disciplinas"
   }
 
-  getTurma() {
-
-  }
-
   getDisciplinas(): Observable<IDisciplina[]> {
-    return this.http.get<IDisciplina[]>(this.disciplinaApiUrl)
+    return this.http.get<IDisciplina[]>(this.apiUrl)
   }
 
   createDisciplina(element): Observable<IDisciplina[]> {
     const { bibliografia, ...data } = element;
-    return this.http.post<IDisciplina[]>(this.disciplinaApiUrl, { ...data, bibliografia: [bibliografia] })
+    return this.http.post<IDisciplina[]>(this.apiUrl, { ...data, bibliografia: [bibliografia] })
   }
 
   updateDisciplina(element): Observable<IDisciplina[]> {
     const { _id, bibliografia, ...data } = element;
-    return this.http.put<IDisciplina[]>(`${this.disciplinaApiUrl}/${_id}`, { ...data, bibliografia: [bibliografia]})
+    return this.http.put<IDisciplina[]>(`${this.apiUrl}/${_id}`, { ...data, bibliografia: [bibliografia]})
   }
 
   deleteDisciplina(element): Observable<IDisciplina[]> {
     const { _id } = element;
-    return this.http.delete<IDisciplina[]>(`${this.disciplinaApiUrl}/${_id}`)
+    return this.http.delete<IDisciplina[]>(`${this.apiUrl}/${_id}`)
   }
 }
