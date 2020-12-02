@@ -24,7 +24,12 @@
     <input [readonly]="onlyView" [required]="!onlyView" formControlName="bibliografia" [name]="bibliografia" matInput>
   </mat-form-field>
 
-  <mat-accordion>
+  <mat-form-field appearance="outline">
+    <mat-label>Turma</mat-label>
+    <input readonly="onlyView" required formControlName="turma" [name]="turma" matInput>
+  </mat-form-field>
+
+  <!-- <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -38,7 +43,7 @@
       <mat-checkbox [required]="!onlyView" formControlName="turma" [name]="turma">{{element.turma}}</mat-checkbox>
 
     </mat-expansion-panel>
-  </mat-accordion>
+  </mat-accordion> -->
 
   <div class="form-buttons">
     <button *ngIf="!onlyView" type="button" (click)="closeDialog()" mat-raised-button class="discart">Descartar alterações</button>

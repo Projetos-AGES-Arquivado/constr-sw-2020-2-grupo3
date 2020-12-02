@@ -21,7 +21,7 @@ export class DisciplinasComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: MatTableDataSource<IDisciplina>;
-  columns: string[] = ["nome", "codigo", "creditos", "edit", "delete"];
+  columns: string[] = ["nome", "codigo", "creditos", "turma", "edit", "delete"];
   turmas: ITurma[];
 
   constructor(private disciplinaService: DisciplinaService, private turmaService:TurmaService, private dialog: MatDialog, private snackBar: MatSnackBar) {
