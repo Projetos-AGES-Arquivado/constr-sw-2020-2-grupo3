@@ -10,8 +10,8 @@ export class DisciplinaService {
 
   apiUrl: string;
   constructor(private http: HttpClient) {
-    this.apiUrl = "http://localhost:3333/disciplinas"
-    // this.apiUrl = "http://ec2-3-135-209-171.us-east-2.compute.amazonaws.com:3333/disciplinas"
+    // this.apiUrl = "http://localhost:3333/disciplinas"
+    this.apiUrl = "http://ec2-3-14-135-172.us-east-2.compute.amazonaws.com:3333/disciplinas"
   }
 
   getDisciplinas(): Observable<IDisciplina[]> {

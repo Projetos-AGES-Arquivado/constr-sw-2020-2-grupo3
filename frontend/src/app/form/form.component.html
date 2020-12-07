@@ -46,9 +46,9 @@
   </mat-accordion> -->
 
   <div class="form-buttons">
-    <button *ngIf="!onlyView" type="button" (click)="closeDialog()" mat-raised-button class="discart">Descartar alterações</button>
-    <button *ngIf="!onlyView" type="submit" mat-raised-button class="submit">{{ element?._id ? 'Salvar' : 'Cadastrar' }}</button>
-    <button *ngIf="onlyView" type="button" (click)="closeDialog()" mat-raised-button class="submit">Fechar</button>
+    <button-component *ngIf="!onlyView" [type]="'button'" (click)="closeDialog()" [className]="'discart'" [label]="'Descartar alterações'"></button-component>
+    <button-component *ngIf="!onlyView" [type]="'submit'" [className]="'submit'" [label]="element?._id ? 'Salvar' : 'Cadastrar'"></button-component>
+    <button-component *ngIf="onlyView" [type]="'button'" (click)="closeDialog()" [className]="'submit'" [label]="'Fechar'"></button-component>
   </div>
 
 </form>

@@ -24,6 +24,7 @@ import { fakeBackendProvider } from './_helpers';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { AlertComponent } from './_components';
+import { ButtonComponent } from './_components';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { DisciplinasComponent } from './disciplinas';
 import { HomeComponent } from './home';
@@ -35,6 +36,7 @@ import { FormComponent } from './form';
     declarations: [
         AppComponent,
         AlertComponent,
+        ButtonComponent,
         DisciplinasComponent,
         HomeComponent,
         LoginComponent,
